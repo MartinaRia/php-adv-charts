@@ -6,7 +6,7 @@ $( document ).ready(function() {
         success: function(dataJasonfromServer){
 
           /* -- generate random lables -- */
-          function generateRandomLables(data, arrayName){
+          /*function generateRandomLables(data, arrayName){
             for (var i = 0; i < data.length; i++) {
               // Generate random names from chance library
               var randomLabel = chance.name({ nationality: 'it' });
@@ -16,7 +16,14 @@ $( document ).ready(function() {
           }
           // recall the function
           var labels =[];
-          generateRandomLables(dataJasonfromServer, labels);
+          generateRandomLables(dataJasonfromServer, labels);*/
+
+          /* generate month name */
+          var labels =[];
+          for (var i = 0; i < dataJasonfromServer.length; i++) {
+            var month = moment().month(i).format("MMMM");
+            labels.push(month);
+          }
 
 
           /* ---- chart js ---- */
