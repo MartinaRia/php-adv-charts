@@ -1,15 +1,28 @@
 $( document ).ready(function() {
     console.log( "ready!" );
 
+    // Generate random names from chance library
+    var randomLabel = chance.name({ nationality: 'it' });
+
     $.ajax({
           url: 'server.php',
           success: function(dataJasonfromServer){
 
+            /* -- generate random lables -- */
+            var labels =[];
+            for (var i = 0; i < dataJasonfromServer.length; i++) {
+              // Generate random names from chance library
+              var randomLabel = chance.name({ nationality: 'it' });
+              // push into array
+              labels.push(randomLabel);
+            };
+
+            /* ---- chart js ---- */
             var ctx = $('#canvas')
             var myChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                labels: labels,
                 datasets: [{
                     label: '# of Votes',
                     data: dataJasonfromServer,
@@ -42,6 +55,7 @@ $( document ).ready(function() {
                 }
             } // /options
         }); // /myChart
+        /* ---- / chart js ---- */
 
       }, // /success
           error: function(richiesta,stato,error){
