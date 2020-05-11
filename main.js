@@ -1,9 +1,6 @@
 $( document ).ready(function() {
     console.log( "ready!" );
 
-    // Generate random names from chance library
-    var randomLabel = chance.name({ nationality: 'it' });
-
     $.ajax({
           url: 'server.php',
           success: function(dataJasonfromServer){
