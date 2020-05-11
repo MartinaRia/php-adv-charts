@@ -2,21 +2,26 @@ $( document ).ready(function() {
     console.log( "ready!" );
 
     $.ajax({
-          url: 'server.php',
-          success: function(dataJasonfromServer){
+        url: 'server.php',
+        success: function(dataJasonfromServer){
 
-            /* -- generate random lables -- */
-            var labels =[];
-            for (var i = 0; i < dataJasonfromServer.length; i++) {
+          /* -- generate random lables -- */
+          function generateRandomLables(data, arrayName){
+            for (var i = 0; i < data.length; i++) {
               // Generate random names from chance library
               var randomLabel = chance.name({ nationality: 'it' });
               // push into array
-              labels.push(randomLabel);
-            };
+              arrayName.push(randomLabel);
+            }
+          }
+          // recall the function
+          var labels =[];
+          generateRandomLables(dataJasonfromServer, labels);
 
-            /* ---- chart js ---- */
-            var ctx = $('#canvas')
-            var myChart = new Chart(ctx, {
+
+          /* ---- chart js ---- */
+          var ctx = $('#canvas');
+          var myChart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: labels,
@@ -51,14 +56,14 @@ $( document ).ready(function() {
                     }]
                 }
             } // /options
-        }); // /myChart
-        /* ---- / chart js ---- */
+          }); // /myChart
+          /* ---- / chart js ---- */
 
-      }, // /success
-          error: function(richiesta,stato,error){
-
-          }, // /error
-        }); // /ajax
+        }, // /success
+        error: function(richiesta,stato,error){
+          $('main .container').html('Spiacenti, si è verificato un errore!')
+        }, // /error
+      }); // /ajax
 
 
 
