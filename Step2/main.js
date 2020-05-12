@@ -1,12 +1,14 @@
 $( document ).ready(function() {
     console.log( "ready!" );
     /* FUNCTION ==============================================*/
+
     // var idCanvasSelector = $('#canvasLine') / $('#canvasPie')
     // var chartType = 'line' / 'pie'
-    // var lables = moment.months() / dataJasonfromServer.fatturato_by_agent.lables]
+    // var lables = moment.months() / dataJasonfromServer.fatturato_by_agent.lables
     // var data = dataJasonfromServer.fatturato.data / dataJasonfromServer.fatturato_by_agent.data
 
     function printChart(idCanvasSelector, chartType, lables, data){
+
       var ctx = idCanvasSelector;
       var myChart = new Chart(ctx, {
         type: chartType,
@@ -45,31 +47,38 @@ $( document ).ready(function() {
         } // /options
       }); // /myChart
 
-    };// /printChart
+    }// /printChart
 
 
 
     /* AJAX 1 ============================================== */
     $.ajax({
         url: 'server.php',
+
         success: function(dataJasonfromServer){
-
-          // var idCanvasSelector = $('#canvasLine') / $('#canvasPie')
-          // var chartType = 'line' / 'pie'
-          // var lables = moment.months() / dataJasonfromServer.fatturato_by_agent.lables]
-          // var data = dataJasonfromServer.fatturato.data / dataJasonfromServer.fatturato_by_agent.data
-
           printChart($('#canvasLine'), 'line', moment.months(), dataJasonfromServer.fatturato.data);
-
         }, // /success
+
         error: function(richiesta,stato,error){
           $('main .container').html('Spiacenti, si è verificato un errore!');
-          console.log(richiesta,stato,error);
         }, // /error
+
       }); // /ajax 1
 
 
+    /* AJAX 2 ============================================== */
+    $.ajax({
+        url: 'server.php',
 
+        success: function(dataJasonfromServer){
+          printChart($('#canvasPie'), 'pie', dataJasonfromServer.fatturato_by_agent.lables, dataJasonfromServer.fatturato_by_agent.data);
+        }, // /success
+
+        error: function(richiesta,stato,error){
+          $('main .container').html('Spiacenti, si è verificato un errore!');
+        }, // /error
+
+      }); // /ajax 2
 
 
 
