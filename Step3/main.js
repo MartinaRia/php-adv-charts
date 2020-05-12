@@ -1,12 +1,8 @@
 $( document ).ready(function() {
     console.log( "ready!" );
-    /* FUNCTION ==============================================*/
 
-    // var idCanvasSelector = $('#canvasLine') / $('#canvasPie')
-    // var chartType = 'line' / 'pie'
-    // var lables = moment.months() / dataJasonfromServer.fatturato_by_agent.lables
-    // var data = dataJasonfromServer.fatturato.data / dataJasonfromServer.fatturato_by_agent.data
 
+    /* FUNCTION for AJAX 1 e 2 ==============================================*/
     function printChart(idCanvasSelector, chartType, lables, data){
 
       var ctx = idCanvasSelector;
@@ -50,94 +46,127 @@ $( document ).ready(function() {
     }// /printChart
 
 
-
     /* AJAX 1 ============================================== */
-    $.ajax({
-        url: 'server.php',
+    function ajax1(){
+      $.ajax({
+          url: 'server.php/?',
+          data:{
+            'level': 'guest',
+          },
 
-        success: function(dataJasonfromServer){
-          printChart($('#canvasLine'), 'line', moment.months(), dataJasonfromServer.fatturato.data);
-        }, // /success
+          success: function(dataJasonfromServer){
+            printChart($('#canvasLine'), 'line', moment.months(), dataJasonfromServer.data);
+          }, // /success
 
-        error: function(richiesta,stato,error){
-          $('main .container').html('Spiacenti, si è verificato un errore!');
-        }, // /error
+          error: function(richiesta,stato,error){
+            $('main .container').html('Spiacenti, si è verificato un errore!');
+          }, // /error
 
-      }); /* /ajax 1 ====*/
+        }); /* /ajax 1 ====*/
+    }
+
 
 
     /* AJAX 2 ============================================== */
-    $.ajax({
-        url: 'server.php',
+    function ajax2(){
+      $.ajax({
+        url: 'server.php/?',
+        data:{
+          'level': 'employee',
+        },
 
-        success: function(dataJasonfromServer){
-          printChart($('#canvasPie'), 'pie', dataJasonfromServer.fatturato_by_agent.lables, dataJasonfromServer.fatturato_by_agent.data);
-        }, // /success
+          success: function(dataJasonfromServer){
+            printChart($('#canvasPie'), 'pie', dataJasonfromServer.fatturato_by_agent.lables, dataJasonfromServer.fatturato_by_agent.data);
+          }, // /success
 
-        error: function(richiesta,stato,error){
-          $('main .container').html('Spiacenti, si è verificato un errore!');
-        }, // /error
+          error: function(richiesta,stato,error){
+            $('main .container').html('Spiacenti, si è verificato un errore!');
+          }, // /error
 
-      });  /* /ajax 2 ====*/
-      
+        });  /* /ajax 2 ====*/
+    }
+
+
 
     /* AJAX 3 ============================================== */
-    $.ajax({
-        url: 'server.php',
+    function ajax3(){
+      $.ajax({
+        url: 'server.php/?',
+        data:{
+          'level': 'clevel',
+        },
 
-        success: function(dataJasonfromServer){
+          success: function(dataJasonfromServer){
 
-          var ctx = $('#canvasMultiLine');
-          var myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: moment.months(),
-                datasets: [{
-                  // team 1 ------------------------------------
-                    label: dataJasonfromServer.team_efficiency.lables[0],
-                    data: dataJasonfromServer.team_efficiency.data[0],
-                    backgroundColor: ['rgba(255, 99, 132, 0.4)'],
-                    borderColor: ['rgba(255, 99, 132, 1)'],
-                    borderWidth: 1
-                  },
-                  {
-                  // team 2 ------------------------------------
-                    label: dataJasonfromServer.team_efficiency.lables[1],
-                    data: dataJasonfromServer.team_efficiency.data[1],
-                    backgroundColor: ['rgba(54, 162, 235, 0.4)'],
-                    borderColor: ['rgba(54, 162, 235, 1)'],
-                    borderWidth: 1
-                  },
-                  {
-                  // team 3 ------------------------------------
-                    label: dataJasonfromServer.team_efficiency.lables[2],
-                    data: dataJasonfromServer.team_efficiency.data[2],
-                    backgroundColor: ['rgba(255, 206, 86, 0.6)'],
-                    borderColor: ['rgba(255, 206, 86, 1)'],
-                    borderWidth: 1
+            var ctx = $('#canvasMultiLine');
+            var myChart = new Chart(ctx, {
+              type: 'line',
+              data: {
+                  labels: moment.months(),
+                  datasets: [{
+                    // team 1 ------------------------------------
+                      label: dataJasonfromServer.team_efficiency.lables[0],
+                      data: dataJasonfromServer.team_efficiency.data[0],
+                      backgroundColor: ['rgba(255, 99, 132, 0.4)'],
+                      borderColor: ['rgba(255, 99, 132, 1)'],
+                      borderWidth: 1
+                    },
+                    {
+                    // team 2 ------------------------------------
+                      label: dataJasonfromServer.team_efficiency.lables[1],
+                      data: dataJasonfromServer.team_efficiency.data[1],
+                      backgroundColor: ['rgba(54, 162, 235, 0.4)'],
+                      borderColor: ['rgba(54, 162, 235, 1)'],
+                      borderWidth: 1
+                    },
+                    {
+                    // team 3 ------------------------------------
+                      label: dataJasonfromServer.team_efficiency.lables[2],
+                      data: dataJasonfromServer.team_efficiency.data[2],
+                      backgroundColor: ['rgba(255, 206, 86, 0.6)'],
+                      borderColor: ['rgba(255, 206, 86, 1)'],
+                      borderWidth: 1
+                    }
+                  ]
+              }, // /data
+              options: {
+                  scales: {
+                      yAxes: [{
+                          ticks: {
+                              beginAtZero: true
+                          }
+                      }]
                   }
-                ]
-            }, // /data
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            } // /options
-          }); // /myChart
+              } // /options
+            }); // /myChart
 
-        }, // /success
+          }, // /success
 
-        error: function(richiesta,stato,error){
-          $('main .container').html('Spiacenti, si è verificato un errore!');
-        }, // /error
+          error: function(richiesta,stato,error){
+            $('main .container').html('Spiacenti, si è verificato un errore!');
+          }, // /error
 
-      });  /* /ajax 3 ====*/
+        });  /* /ajax 3 ====*/
+    }
 
 
+    /* GET INPUT VAL AND DO SOMETHING ============*/
+    $('.box button').click(
+      function(){
+        var inputVal = $('.inputLevel').val();
 
+        if (inputVal === 'guest') {
+          ajax1();
+        } else if (inputVal === 'employee') {
+          ajax1();
+          ajax2();
+        }  else if (inputVal === 'clevel') {
+          ajax1();
+          ajax2();
+          ajax3();
+        }// fine ifelse
+
+      } // fine function
+    );// fine click
 
 }); // doc ready
