@@ -8,8 +8,8 @@
   $int = []; // da popolare
   $dataByAgent = $graphs["fatturato_by_agent"]["data"];
   foreach ($dataByAgent as $names => $value) { //ciclo per estrarre i dati..
-  $lables[] = $names; //..l'array $lables viene popolato con i soli nomi degli agent..
-  $int[] = $value; //..l'array $int viene popolato con i soli numeri degli agent..
+    $lables[] = $names; //..l'array $lables viene popolato con i soli nomi degli agent..
+    $int[] = $value; //..l'array $int viene popolato con i soli numeri degli agent..
   };
   //push $lables = [] into $graphs + sobstitute $data ogetto with array $int
   $graphs["fatturato_by_agent"]["lables"] = $lables;
