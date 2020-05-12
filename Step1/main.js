@@ -18,12 +18,14 @@ $( document ).ready(function() {
           var labels =[];
           generateRandomLables(dataJasonfromServer, labels);*/
 
-          /* generate month name */
-          var labels =[];
+          /* generate month name [NOT NECESSARY]*/
+          /*var labels = moment().month(i).format("MMMM");
           for (var i = 0; i < dataJasonfromServer.length; i++) {
             var month = moment().month(i).format("MMMM");
             labels.push(month);
-          }
+          }*/
+          var labels = moment.months();
+
 
 
           /* ---- chart js ---- */
