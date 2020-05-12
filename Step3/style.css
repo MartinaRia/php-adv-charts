@@ -14,7 +14,6 @@ body{
 
 main .container{
   width: 100%;
-  height: 100vh;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
@@ -30,11 +29,17 @@ main .box{
 
 .box input, .box button{
   background: transparent;
-  border: 1px solid blue;
+  border: 3px solid #0a0a9366;
+  border-radius: 2px;
   font-weight: bold;
   padding: 20px;
   margin: 5px;
-  cursor: pointer
+  cursor: pointer;
+  color: #0000008f;
+  transition: all 0.3s linear;
+}
+.box button:hover{
+  background: #0a0a9333;
 }
 
 .container canvas{

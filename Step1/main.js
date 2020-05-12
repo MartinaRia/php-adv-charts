@@ -35,7 +35,7 @@ $( document ).ready(function() {
             data: {
                 labels: labels,
                 datasets: [{
-                    label: '# of Votes',
+                    label: 'Vendite',
                     data: dataJasonfromServer,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',

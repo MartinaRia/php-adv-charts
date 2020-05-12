@@ -18,7 +18,7 @@
   echo json_encode($graphs);
 
   /* trasformare $data in array di soli int*/
-  /*Ss vogliono creare due grafici utilizzando i dati contenuti dentro al file data.php. Questa volta
+  /*Si vogliono creare due grafici utilizzando i dati contenuti dentro al file data.php. Questa volta
   il file contiene non solo i dati ma anche il tipo di grafico atteso.
   Il primo grafico è lo stesso del punto precedente mentre il secondo è un grafico a torta; per
   questo grafico i dati forniti non sono solo i “valori” ma anche le “label”*/

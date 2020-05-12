@@ -153,14 +153,21 @@ $( document ).ready(function() {
     /* GET INPUT VAL AND DO SOMETHING ============*/
     $('.box button').click(
       function(){
-        var inputVal = $('.inputLevel').val();
+        var inputVal = $('.inputLevel').val(); //get input va
+        $('.inputLevel').val(''); //clear input
 
         if (inputVal === 'guest') {
+          $('canvas').show();
           ajax1();
+          $('#canvasPie').hide();
+          $('#canvasMultiLine').hide();
         } else if (inputVal === 'employee') {
+          $('canvas').show();
           ajax1();
           ajax2();
+          $('#canvasMultiLine').toggle();
         }  else if (inputVal === 'clevel') {
+          $('canvas').show();
           ajax1();
           ajax2();
           ajax3();

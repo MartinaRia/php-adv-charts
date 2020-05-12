@@ -2,25 +2,22 @@
   header('Content-Type: application/json');
   require ('database.php');
 
+  $fbaDatalables = [];
+  $fbaDataInt = [];
 
-  /* -- manipolazione del db: aggiungere l'array $lables e sostituire l'array data con i soli int --- */
-
-  $fbaDatalables = []; // da popolare
-  $fbaDataInt = []; // da popolare
-
-  $teDatalables = []; // da popolare
-  $teDataInt = []; // da popolare
+  $teDatalables = [];
+  $teDataInt = [];
 
   $dataByAgent = $graphs["fatturato_by_agent"]["data"];
   $dataByTeam = $graphs["team_efficiency"]["data"];
 
-  foreach ($dataByAgent as $names => $value) { //ciclo per estrarre i dati..
-    $fbaDatalables[] = $names; //..l'array $lables viene popolato con i soli nomi degli agent..
-    $fbaDataInt[] = $value; //..l'array $int viene popolato con i soli numeri degli agent..
+  foreach ($dataByAgent as $names => $value) {
+    $fbaDatalables[] = $names;
+    $fbaDataInt[] = $value;
   };
-  foreach ($dataByTeam as $names => $value) { //ciclo per estrarre i dati..
-    $teDatalables[] = $names; //..l'array $lables viene popolato con i soli nome del team..
-    $teDataInt[] = $value; //..l'array $int viene popolato con i soli numeri del team..
+  foreach ($dataByTeam as $names => $value) {
+    $teDatalables[] = $names;
+    $teDataInt[] = $value;
   };
 
   $graphs["fatturato_by_agent"]["lables"] = $fbaDatalables;
@@ -39,8 +36,5 @@
   } elseif ($declareLevel === $graphs['team_efficiency']['access']) {
     echo json_encode($graphs);
   }
-
-
-
 
 ?>
