@@ -51,26 +51,12 @@ $( document ).ready(function() {
 
 
 
-    /* AJAX 1 ============================================== */
+    /* AJAX  ============================================== */
     $.ajax({
         url: 'server.php',
 
         success: function(dataJasonfromServer){
           printChart($('#canvasLine'), 'line', moment.months(), dataJasonfromServer.fatturato.data);
-        }, // /success
-
-        error: function(richiesta,stato,error){
-          $('main .container').html('Spiacenti, si è verificato un errore!');
-        }, // /error
-
-      }); // /ajax 1
-
-
-    /* AJAX 2 ============================================== */
-    $.ajax({
-        url: 'server.php',
-
-        success: function(dataJasonfromServer){
           printChart($('#canvasPie'), 'pie', dataJasonfromServer.fatturato_by_agent.lables, dataJasonfromServer.fatturato_by_agent.data);
         }, // /success
 
@@ -78,9 +64,6 @@ $( document ).ready(function() {
           $('main .container').html('Spiacenti, si è verificato un errore!');
         }, // /error
 
-      }); // /ajax 2
-
-
-
+      }); // /ajax 1
 
 }); // doc ready
