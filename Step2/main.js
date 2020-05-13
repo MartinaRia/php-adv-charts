@@ -56,8 +56,8 @@ $( document ).ready(function() {
         url: 'server.php',
 
         success: function(dataJasonfromServer){
-          printChart($('#canvasLine'), 'line', moment.months(), dataJasonfromServer.fatturato.data);
-          printChart($('#canvasPie'), 'pie', dataJasonfromServer.fatturato_by_agent.lables, dataJasonfromServer.fatturato_by_agent.data);
+          printChart($('#canvasLine'), dataJasonfromServer.fatturato.type, moment.months(), dataJasonfromServer.fatturato.data);
+          printChart($('#canvasPie'), dataJasonfromServer.fatturato_by_agent.type, dataJasonfromServer.fatturato_by_agent.lables, dataJasonfromServer.fatturato_by_agent.data);
         }, // /success
 
         error: function(richiesta,stato,error){
